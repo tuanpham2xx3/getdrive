@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOWN_VIDEO Pipeline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <!-- Background effects -->
+    <div class="bg-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-icon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+            </div>
+            <div>
+                <h1>DOWN_VIDEO Pipeline</h1>
+                <p class="subtitle">Google Drive → Extract → Clean → Sync</p>
+            </div>
+        </header>
+
+        <!-- Pipeline Progress -->
+        <div class="pipeline-progress">
+            <div class="pipeline-step" id="progress-step1" data-step="1">
+                <div class="step-dot"><span>1</span></div>
+                <span class="step-label">Get Links</span>
+            </div>
+            <div class="pipeline-connector" id="connector-1"></div>
+            <div class="pipeline-step" id="progress-step2" data-step="2">
+                <div class="step-dot"><span>2</span></div>
+                <span class="step-label">Remove</span>
+            </div>
+            <div class="pipeline-connector" id="connector-2"></div>
+            <div class="pipeline-step" id="progress-step3" data-step="3">
+                <div class="step-dot"><span>3</span></div>
+                <span class="step-label">Sync</span>
+            </div>
+        </div>
+
+        <!-- Step 1: Get Links -->
+        <section class="step-card" id="step-1">
+            <div class="step-header">
+                <div class="step-badge">Step 1</div>
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                    </svg>
+                    Get Links
+                </h2>
+                <div class="step-status" id="status-1">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Chờ chạy</span>
+                </div>
+            </div>
+            <p class="step-desc">Nhập link Google Drive folder để quét và lấy danh sách toàn bộ file/folder.</p>
+
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                    </svg>
+                    <input type="text" id="gdrive-link" placeholder="https://drive.google.com/drive/folders/..."
+                        autocomplete="off">
+                </div>
+                <div class="folder-id-preview" id="folder-id-preview"></div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                    <input type="text" id="folder-name" placeholder="Tên folder gốc (vd: Khóa học ABC)"
+                        autocomplete="off">
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" id="btn-getlinks" onclick="runGetLinks()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    Run GetLinks
+                </button>
+                <button class="btn btn-danger hidden" id="btn-stop-1" onclick="stopTask(1)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="6" width="12" height="12" />
+                    </svg>
+                    Stop
+                </button>
+                <button class="btn btn-reconnect hidden" id="btn-reconnect-1" onclick="reconnectLog(1)">
+                    📡 Xem log
+                </button>
+            </div>
+
+            <div class="log-panel hidden" id="log-panel-1">
+                <div class="log-header">
+                    <span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="4 17 10 11 4 5" />
+                            <line x1="12" y1="19" x2="20" y2="19" />
+                        </svg>
+                        Terminal Output
+                    </span>
+                    <button class="btn-icon" onclick="clearLog(1)" title="Clear log">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="log-content" id="log-content-1"></div>
+            </div>
+        </section>
+
+        <!-- Step 2: Remove -->
+        <section class="step-card" id="step-2">
+            <div class="step-header">
+                <div class="step-badge">Step 2</div>
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                    </svg>
+                    Remove Junk
+                </h2>
+                <div class="step-status" id="status-2">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Chờ chạy</span>
+                </div>
+            </div>
+            <p class="step-desc">Xóa các file/folder không cần thiết khỏi output.json (quảng cáo, spam...).</p>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" id="btn-remove" onclick="runRemove()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    Run Remove
+                </button>
+                <button class="btn btn-danger hidden" id="btn-stop-2" onclick="stopTask(2)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="6" width="12" height="12" />
+                    </svg>
+                    Stop
+                </button>
+                <button class="btn btn-reconnect hidden" id="btn-reconnect-2" onclick="reconnectLog(2)">
+                    📡 Xem log
+                </button>
+            </div>
+
+            <div class="log-panel hidden" id="log-panel-2">
+                <div class="log-header">
+                    <span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="4 17 10 11 4 5" />
+                            <line x1="12" y1="19" x2="20" y2="19" />
+                        </svg>
+                        Terminal Output
+                    </span>
+                    <button class="btn-icon" onclick="clearLog(2)" title="Clear log">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="log-content" id="log-content-2"></div>
+            </div>
+        </section>
+
+        <!-- Step 3: Sync -->
+        <section class="step-card" id="step-3">
+            <div class="step-header">
+                <div class="step-badge">Step 3</div>
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10" />
+                        <polyline points="1 20 1 14 7 14" />
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                    </svg>
+                    Sync to GDrive
+                </h2>
+                <div class="step-status" id="status-3">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Chờ chạy</span>
+                </div>
+            </div>
+            <p class="step-desc">Upload toàn bộ nội dung lên Google Drive đích thông qua rclone.</p>
+
+            <div class="option-group">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="dry-run-toggle">
+                    <span class="checkmark"></span>
+                    <span>Dry Run <small>(chỉ xem trước, không upload)</small></span>
+                </label>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" id="btn-sync" onclick="runSync()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    Run Sync
+                </button>
+                <button class="btn btn-danger hidden" id="btn-stop-3" onclick="stopTask(3)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="6" width="12" height="12" />
+                    </svg>
+                    Stop
+                </button>
+                <button class="btn btn-reconnect hidden" id="btn-reconnect-3" onclick="reconnectLog(3)">
+                    📡 Xem log
+                </button>
+            </div>
+
+            <div class="log-panel hidden" id="log-panel-3">
+                <div class="log-header">
+                    <span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="4 17 10 11 4 5" />
+                            <line x1="12" y1="19" x2="20" y2="19" />
+                        </svg>
+                        Terminal Output
+                    </span>
+                    <button class="btn-icon" onclick="clearLog(3)" title="Clear log">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="log-content" id="log-content-3"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
