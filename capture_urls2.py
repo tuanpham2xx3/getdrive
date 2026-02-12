@@ -1,7 +1,7 @@
 """
 Capture Video/Audio URLs from Google Drive
 Flow: 
-1. Mở Chrome với profile hệ thống (đã login Google sẵn)
+1. Load cookies
 2. Mở link
 3. Click play video
 4. Capture URLs có &mime=video hoặc &mime=audio
@@ -11,9 +11,7 @@ Flow:
 8. Mở URL audio
 9. Tải audio
 10. Gộp video + audio bằng FFmpeg
-
-Usage:
-  python capture_urls.py <gdrive_url>
+11. Output file path để web tải xuống
 """
 
 from playwright.sync_api import sync_playwright
@@ -22,9 +20,8 @@ import time
 import subprocess
 import os
 
-# Sử dụng Chrome profile mặc định của hệ thống (đã login Google sẵn)
-CHROME_USER_DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'chrome_profile')
-
+# Config
+cookies_file = "drive.google.com_cookies.txt"
 captured_urls = []
 
 def clean_url(url):
@@ -32,6 +29,30 @@ def clean_url(url):
     if "&range=" in url:
         return url.split("&range=")[0]
     return url
+
+def parse_netscape_cookies(cookie_file):
+    cookies = []
+    with open(cookie_file, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            parts = line.split('\t')
+            if len(parts) >= 7:
+                cookie = {
+                    'name': parts[5],
+                    'value': parts[6],
+                    'domain': parts[0],
+                    'path': parts[2],
+                    'secure': parts[3].upper() == 'TRUE',
+                }
+                if parts[4] != '0':
+                    try:
+                        cookie['expires'] = int(parts[4])
+                    except:
+                        pass
+                cookies.append(cookie)
+    return cookies
 
 def check_url_size(url, cookies_dict, headers):
     """Kiểm tra size của URL, trả về 0 nếu là redirect page"""
@@ -165,6 +186,84 @@ def download_file_multithread(url, filename, cookies_dict, headers, num_threads=
     print(f"✅ Đã tải: {filename} ({final_size//1024//1024}MB)")
     return True
 
+def download_file(url, filename, cookies_dict, headers, max_retries=3):
+    """Tải file từ URL với cookies và retry logic. Trả về 'redirect' nếu size = 0"""
+    import requests
+    
+    # Xóa file lỗi nhỏ (< 10KB) từ lần chạy trước
+    if os.path.exists(filename):
+        file_size = os.path.getsize(filename)
+        if file_size < 10000:  # < 10KB chắc chắn là lỗi
+            os.remove(filename)
+            print(f"[INFO] Deleted corrupted file: {filename} ({file_size} bytes)")
+    
+    for attempt in range(max_retries):
+        try:
+            # Check if file partially downloaded
+            downloaded = 0
+            mode = 'wb'
+            request_headers = headers.copy()
+            
+            if os.path.exists(filename):
+                downloaded = os.path.getsize(filename)
+                if downloaded > 0:
+                    request_headers['Range'] = f'bytes={downloaded}-'
+                    mode = 'ab'
+                    print(f"[INFO] Resuming from {downloaded//1024//1024}MB...")
+            
+            print(f"[INFO] Downloading {filename}... (attempt {attempt + 1}/{max_retries})")
+            response = requests.get(url, cookies=cookies_dict, headers=request_headers, stream=True, timeout=60)
+            
+            # Handle range response
+            if response.status_code == 206:
+                content_range = response.headers.get('content-range', '')
+                if '/' in content_range:
+                    total_size = int(content_range.split('/')[-1])
+                else:
+                    total_size = downloaded + int(response.headers.get('content-length', 0))
+            else:
+                total_size = int(response.headers.get('content-length', 0))
+                downloaded = 0
+                mode = 'wb'
+            
+            # Nếu size = 0 hoặc quá nhỏ (< 10KB), đây là redirect page
+            if total_size < 10000:
+                print(f"[WARNING] Size = {total_size} bytes (< 10KB), đây là redirect page...")
+                return 'redirect'
+            
+            if response.status_code in [200, 206] and total_size > 0:
+                with open(filename, mode) as f:
+                    for chunk in response.iter_content(chunk_size=1024*1024):
+                        if chunk:
+                            f.write(chunk)
+                            downloaded += len(chunk)
+                            percent = (downloaded / total_size) * 100
+                            print(f"\r  Đang tải: {percent:.1f}% ({downloaded//1024//1024}MB/{total_size//1024//1024}MB)", end="", flush=True)
+                
+                # Kiểm tra lại file size sau khi tải
+                actual_size = os.path.getsize(filename) if os.path.exists(filename) else 0
+                if actual_size < 10000:
+                    print(f"\n[WARNING] Downloaded file too small ({actual_size} bytes), likely redirect...")
+                    os.remove(filename)
+                    return 'redirect'
+                
+                print(f"\n✅ Đã tải: {filename} ({total_size//1024//1024}MB)")
+                return True
+            else:
+                print(f"[ERROR] Response status: {response.status_code}, size: {total_size}")
+                
+        except Exception as e:
+            print(f"\n[WARNING] Download error (attempt {attempt + 1}): {str(e)[:100]}")
+            if attempt < max_retries - 1:
+                print(f"[INFO] Retrying in 3 seconds...")
+                import time
+                time.sleep(3)
+            else:
+                print(f"[ERROR] Failed after {max_retries} attempts")
+                return False
+    
+    return False
+
 def merge_video_audio(video_file, audio_file, output_file):
     """Gộp video và audio bằng FFmpeg"""
     print(f"\n[STEP 10] Đang gộp video + audio...")
@@ -231,29 +330,31 @@ def main():
     print(f"\n[INFO] URL: {gdrive_url}")
     
     with sync_playwright() as p:
-        # ===== STEP 0: Mở Chrome với profile hệ thống (đã login sẵn) =====
-        print("\n[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...")
+        # ===== STEP 0: Load cookies trước =====
+        print("\n[STEP 0] Loading cookies...")
+        cookies = parse_netscape_cookies(cookies_file)
+        print(f"Loaded {len(cookies)} cookies")
         
-        if not os.path.exists(CHROME_USER_DATA):
-            print(f"[ERROR] Không tìm thấy Chrome profile tại: {CHROME_USER_DATA}")
-            print("[INFO] Hãy đảm bảo Chrome đã được cài đặt và đã login Google.")
-            return
-        
-        context = p.chromium.launch_persistent_context(
-            CHROME_USER_DATA,
-            channel='chrome',
+        # Launch browser với DevTools mở sẵn
+        browser = p.chromium.launch(
             headless=False,
-            args=[
-                '--no-sandbox',
-                '--disable-dev-shm-usage',
-                '--auto-open-devtools-for-tabs',
-            ],
+            args=['--no-sandbox', '--disable-dev-shm-usage']
+        )
+        
+        context = browser.new_context(
             viewport={'width': 3840, 'height': 2160},
+            user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
             device_scale_factor=2
         )
-        print("✅ Chrome profile loaded (đã login sẵn)")
         
-        page = context.pages[0] if context.pages else context.new_page()
+        # Add cookies vào context
+        try:
+            context.add_cookies(cookies)
+            print("Cookies added successfully")
+        except Exception as e:
+            print(f"[WARNING] Cookie error: {e}")
+        
+        page = context.new_page()
         
         # Bắt network requests
         def handle_response(response):
@@ -344,7 +445,7 @@ def main():
         # ===== STEP 5: Chọn URL video và audio chất lượng cao nhất =====
         print("\n[STEP 5] Kiểm tra chất lượng từng URL...")
         
-        # Lấy cookies từ browser context
+        # Lấy cookies từ browser để check size
         browser_cookies = context.cookies()
         cookies_dict = {c['name']: c['value'] for c in browser_cookies}
         headers = {
@@ -381,11 +482,7 @@ def main():
                     best_video_size = size
                     video_url = vurl
             
-            # Fallback: nếu tất cả URL đều 0 bytes, vẫn lấy URL đầu tiên để thử download + redirect
-            if not video_url and all_video_urls:
-                video_url = all_video_urls[0]
-                print(f"  ⚠️ Tất cả video URL = 0 bytes, thử URL đầu tiên với redirect logic...")
-            elif video_url:
+            if video_url:
                 print(f"  ✅ Chọn video chất lượng cao nhất: {best_video_size / 1024 / 1024:.1f}MB")
         
         # Kiểm tra size từng audio URL để chọn chất lượng cao nhất
@@ -409,17 +506,15 @@ def main():
                     best_audio_size = size
                     audio_url = aurl
             
-            # Fallback: nếu tất cả URL đều 0 bytes, vẫn lấy URL đầu tiên
-            if not audio_url and all_audio_urls:
-                audio_url = all_audio_urls[0]
-                print(f"  ⚠️ Tất cả audio URL = 0 bytes, thử URL đầu tiên với redirect logic...")
-            elif audio_url:
+            if audio_url:
                 print(f"  ✅ Chọn audio chất lượng cao nhất: {best_audio_size / 1024 / 1024:.1f}MB")
         
         if video_url and audio_url:
-            print(f"\n✅ Đã chọn video ({best_video_size//1024//1024}MB) + audio ({best_audio_size//1024//1024}MB)")
+            print(f"\n✅ Đã chọn video ({best_video_size//1024//1024}MB) + audio ({best_audio_size//1024//1024}MB) chất lượng cao nhất")
         else:
             print(f"⚠️ Chỉ lấy được: video={'có' if video_url else 'không'}, audio={'có' if audio_url else 'không'}")
+        
+        # cookies_dict và headers đã được lấy ở STEP 5
         
         # Lấy file ID
         import re
@@ -561,12 +656,16 @@ def main():
                     break
         
         print("\n[INFO] Đóng browser...")
-        context.close()
+        browser.close()
     
     # ===== STEP 10: Gộp video + audio =====
     if video_url and audio_url:
         if os.path.exists(video_file) and os.path.exists(audio_file):
             merge_video_audio(video_file, audio_file, output_merged)
+    
+    # Output file path for web server to pick up
+    if os.path.exists(output_merged):
+        print(f"OUTPUT_FILE:{output_merged}")
     
     print("\n" + "=" * 60)
     print("HOÀN THÀNH!")
@@ -574,3 +673,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

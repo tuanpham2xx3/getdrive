@@ -1,0 +1,107 @@
+# Script sync_gdrive.py — Download & Upload từ output.json
+
+## Bối cảnh
+
+- **Chrome profile**: login acc **nguồn** (có quyền xem/tải file)
+- **rclone `gdrive:`**: cấu hình acc **đích** (nơi upload lên)
+- Video bị Google chặn download trực tiếp → phải dùng [capture_urls.py](file:///c:/PROJECT/DOWN_VIDEO/capture_urls.py) (Playwright)
+- File khác (docx, rtf, xlsx...) không bị chặn → download bằng HTTP trực tiếp
+
+## Flow xử lý
+
+```mermaid
+flowchart TD
+    A[Đọc output.json] --> B[Duyệt cây đệ quy]
+    B --> C{type?}
+    C -->|folder| D[rclone mkdir gdrive:path]
+    D --> E[Duyệt children]
+    C -->|video/mp4| F[capture_urls.py URL]
+    F --> G[Đợi merged file]
+    G --> H[Rename đúng tên]
+    H --> I[rclone copy local → gdrive:path]
+    I --> J[Xóa file local]
+    C -->|file khác| K[Download qua GDrive URL + cookies Chrome]
+    K --> I
+```
+
+## Chi tiết kỹ thuật
+
+### 1. Download file KHÔNG phải video
+
+Vì acc Chrome ≠ acc rclone, không dùng rclone để tải từ nguồn. Thay vào đó:
+
+```
+URL = https://drive.google.com/uc?export=download&id={file_id}
+```
+
+Dùng `requests.get()` với cookies lấy từ Chrome profile (dùng thư viện `browser_cookie3` hoặc mở Playwright 1 lần lấy cookies rồi dùng lại).
+
+> [!IMPORTANT]
+> **Lựa chọn cách lấy cookies Chrome:**
+> - **Cách A**: Dùng `browser_cookie3` (đơn giản, pip install)
+> - **Cách B**: Mở Playwright 1 lần đầu → lấy cookies → dùng `requests` cho tất cả file còn lại
+>
+> Tôi đề xuất **Cách B** vì capture_urls.py đã dùng Playwright sẵn, không cần thêm dependency.
+
+### 2. Download video/mp4
+
+```python
+subprocess.run(["python", "capture_urls.py", gdrive_url], cwd=WORK_DIR)
+# → Output: merged_{file_id}.mp4
+# → Rename thành tên gốc
+# → rclone copy lên gdrive:
+```
+
+### 3. Upload lên GDrive đích
+
+```bash
+rclone copy "local_file" "gdrive:Full Combo khóa học.../Chương 01/..." --progress
+```
+
+Upload vào **gốc** `gdrive:` (Drive của tôi), giữ nguyên cấu trúc folder.
+
+### 4. Cấu trúc folder ví dụ
+
+```
+gdrive:
+└── Full Combo khóa học Vũ Nguyễn Coder/
+    └── Khoá Học C/c++ Cơ Bản.../
+        ├── Chương 01.../
+        │   ├── Lí thuyết 1.A - Cài đặt môi trường....mp4  ← video (capture_urls)
+        │   └── ...
+        ├── Chương 02.../
+        │   ├── Lí thuyết 2.A....mp4  ← video
+        │   ├── Thực hành 2.1.rtf    ← direct download
+        │   └── k29cmutp,7/
+        │       └── Dangkitrai.xlsx   ← direct download
+        └── ...
+```
+
+### 5. Resume support
+
+Trước khi xử lý mỗi file, chạy `rclone lsf gdrive:"path/filename"`. Nếu đã tồn tại → skip.
+
+### 6. Dry-run mode
+
+`python sync_gdrive.py --dry-run` → chỉ in log lệnh sẽ chạy, không thực thi.
+
+## Proposed Changes
+
+### [NEW] [sync_gdrive.py](file:///c:/PROJECT/DOWN_VIDEO/sync_gdrive.py)
+
+| Function | Mô tả |
+|----------|--------|
+| `ensure_rclone_path()` | Thêm rclone vào PATH |
+| `run_rclone(args)` | Wrapper subprocess rclone |
+| `create_folder(remote_path)` | `rclone mkdir gdrive:"path"` |
+| `file_exists_remote(remote_path)` | Check file đã có trên remote |
+| `get_chrome_cookies()` | Mở Playwright lấy cookies 1 lần |
+| `download_file_direct(file_id, local_path, cookies)` | Download file qua GDrive URL |
+| [download_video(gdrive_url, local_path)](file:///c:/PROJECT/DOWN_VIDEO/gdrive_video_downloader.py#266-328) | Gọi [capture_urls.py](file:///c:/PROJECT/DOWN_VIDEO/capture_urls.py) subprocess |
+| `upload_and_cleanup(local_path, remote_path)` | rclone copy + xóa local |
+| `process_node(node, remote_parent, cookies, stats)` | Đệ quy xử lý node |
+| [main()](file:///c:/PROJECT/DOWN_VIDEO/gdrive_video_downloader.py#330-412) | Load JSON, parse args, chạy |
+
+## Verification
+
+- `python sync_gdrive.py --dry-run` để xem log trước khi chạy thật

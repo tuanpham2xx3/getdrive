@@ -1,0 +1,289 @@
+
+[INFO] URL: https://drive.google.com/file/d/1a8vj2-zSVchisxE6RXguWH7HBh7_WqS-/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/1YkHwyGqkxYUjRDmSv_E2emqa9WCiUNZv/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/1UjHLxhE97q8ShlmuEv1lHa0jJ0nWTDLb/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+════════════════════════════════════════════════════════════
+  🔄 SYNC GOOGLE DRIVE
+  Mode: LIVE (thực thi thật)
+  Remote: gdrive: (gốc Drive của tôi)
+════════════════════════════════════════════════════════════
+
+[22:19:48] ✅ rclone ready: rclone v1.73.0
+[22:19:48] ℹ️ Đọc output.json...
+[22:19:48] ℹ️ Tổng cộng: 149 files trong cây thư mục
+[22:19:48] ℹ️ Đang lấy cookies từ Chrome profile...
+[22:19:49] ❌ Lỗi lấy cookies: BrowserType.launch_persistent_context: Target page, context or browser has been closed
+Browser logs:
+
+<launching> C:\Program Files\Google\Chrome\Application\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --profile-directory=Default --user-data-dir=C:\Users\phamt\AppData\Local\Google\Chrome\User Data --remote-debugging-pipe about:blank
+<launched> pid=24064
+Call log:
+  - <launching> C:\Program Files\Google\Chrome\Application\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --profile-directory=Default --user-data-dir=C:\Users\phamt\AppData\Local\Google\Chrome\User Data --remote-debugging-pipe about:blank
+  - <launched> pid=24064
+  - [pid=24064] <gracefully close start>
+  - [pid=24064] <kill>
+  - [pid=24064] <will force kill>
+  - [pid=24064] taskkill stderr: ERROR: The process "24064" not found.
+  - [pid=24064] <process did exit: exitCode=21, signal=null>
+  - [pid=24064] starting temporary directories cleanup
+  - [pid=24064] finished temporary directories cleanup
+  - [pid=24064] <gracefully close end>
+
+[22:19:49] ⚠️ Không lấy được cookies — download file khác video có thể thất bại
+[22:19:49] ℹ️ Temp dir: C:\PROJECT\DOWN_VIDEO\_temp_download
+[22:19:49] ℹ️ 📋 Bắt đầu mới (progress file: C:\PROJECT\DOWN_VIDEO\_sync_progress.json)
+[22:19:49] ℹ️ Bắt đầu xử lý...
+
+[22:19:49] 📁 📁 Full Combo khóa học Vũ Nguyễn Coder  (0 files, 2 folders)
+[22:19:49] 📁 mkdir → gdrive:Full Combo khóa học Vũ Nguyễn Coder
+[22:19:49] ℹ️ $ rclone mkdir "gdrive:Full Combo khóa học Vũ Nguyễn Coder"
+[22:19:52] ℹ️ ├─ [1/2] Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder
+[22:19:52] 📁 │ 📁 Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder  (0 files, 17 folders)
+[22:19:52] 📁 mkdir → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder
+[22:19:52] ℹ️ $ rclone mkdir "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder"
+[22:19:55] ℹ️ │ ├─ [1/17] Chương 01 Chương trình đầu tiên   
+[22:19:55] 📁 │ │ 📁 Chương 01 Chương trình đầu tiên     (4 files, 0 folders)
+[22:19:55] 📁 mkdir → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 01 Chương trình đầu tiên
+[22:19:55] ℹ️ $ rclone mkdir "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 01 Chương trình đầu tiên"
+[22:20:00] ℹ️ │ │ ├─ [1/4] Lí thuyết 1.A - Cài đặt môi trường C++ với Visual Studio 2022  .mp4
+[22:20:03] 🎬 │ │ │ 🎬 Lí thuyết 1.A - Cài đặt môi trường C++ với Visual Studio 2022  .mp4  (34.71 MB)
+[22:20:03] 🎬 Bắt đầu capture video: Lí thuyết 1.A - Cài đặt môi trường C++ với Visual Studio 2022  .mp4
+[22:20:03] ℹ️ Link: https://drive.google.com/file/d/1a8vj2-zSVchisxE6RXguWH7HBh7_WqS-/view
+[22:20:04] ❌ capture_urls.py exit code = 1
+[22:20:04] ❌ │ │ │ ❌ Video download fail: Lí thuyết 1.A - Cài đặt môi trường C++ với Visual Studio 2022  .mp4
+
+  [░░░░░░░░░░░░░░░░░░░░] 0%  (0/1)  skip=0  fail=1
+
+[22:20:04] ℹ️ │ │ ├─ [2/4] Lí thuyết 1.C - Cấu trúc một chương trình C++ đơn giản  .mp4
+[22:20:08] 🎬 │ │ │ 🎬 Lí thuyết 1.C - Cấu trúc một chương trình C++ đơn giản  .mp4  (23.15 MB)
+[22:20:08] 🎬 Bắt đầu capture video: Lí thuyết 1.C - Cấu trúc một chương trình C++ đơn giản  .mp4
+[22:20:08] ℹ️ Link: https://drive.google.com/file/d/1YkHwyGqkxYUjRDmSv_E2emqa9WCiUNZv/view
+[22:20:09] ❌ capture_urls.py exit code = 1
+[22:20:09] ❌ │ │ │ ❌ Video download fail: Lí thuyết 1.C - Cấu trúc một chương trình C++ đơn giản  .mp4
+
+  [░░░░░░░░░░░░░░░░░░░░] 0%  (0/2)  skip=0  fail=2
+
+[22:20:09] ℹ️ │ │ ├─ [3/4] Lý thuyết 1.B - Code C++ ngay trên trình duyệt với OnlineGDB.com  .mp4
+[22:20:11] 🎬 │ │ │ 🎬 Lý thuyết 1.B - Code C++ ngay trên trình duyệt với OnlineGDB.com  .mp4  (14.11 MB)
+[22:20:11] 🎬 Bắt đầu capture video: Lý thuyết 1.B - Code C++ ngay trên trình duyệt với OnlineGDB.com  .mp4
+[22:20:11] ℹ️ Link: https://drive.google.com/file/d/1UjHLxhE97q8ShlmuEv1lHa0jJ0nWTDLb/view
+[22:20:12] ❌ capture_urls.py exit code = 1
+[INFO] URL: https://drive.google.com/file/d/1z-hIilf-9yhwIOtHw2tlTAy250G8rhqd/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/14khZPpDED2ubp135Al3kocHrWzxzd0-i/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/1I7m0_yCin9g1TmlJ5xLbf5mkaeGF7VxQ/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/16inDnhh5zk3v7w-_w8Fvy-V37HurD-J7/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[22:20:12] ❌ │ │ │ ❌ Video download fail: Lý thuyết 1.B - Code C++ ngay trên trình duyệt với OnlineGDB.com  .mp4
+
+  [░░░░░░░░░░░░░░░░░░░░] 0%  (0/3)  skip=0  fail=3
+
+[22:20:12] ℹ️ │ │ ├─ [4/4] Lời mở đầu - Hướng dẫn cách học trong group  .mp4
+[22:20:14] 🎬 │ │ │ 🎬 Lời mở đầu - Hướng dẫn cách học trong group  .mp4  (29.02 MB)
+[22:20:14] 🎬 Bắt đầu capture video: Lời mở đầu - Hướng dẫn cách học trong group  .mp4
+[22:20:14] ℹ️ Link: https://drive.google.com/file/d/1z-hIilf-9yhwIOtHw2tlTAy250G8rhqd/view
+[22:20:16] ❌ capture_urls.py exit code = 1
+[22:20:16] ❌ │ │ │ ❌ Video download fail: Lời mở đầu - Hướng dẫn cách học trong group  .mp4
+
+  [░░░░░░░░░░░░░░░░░░░░] 0%  (0/4)  skip=0  fail=4
+
+[22:20:16] ℹ️ │ ├─ [2/17] Chương 02 Biến và kiểu dữ liệu   
+[22:20:16] 📁 │ │ 📁 Chương 02 Biến và kiểu dữ liệu     (5 files, 1 folders)
+[22:20:16] 📁 mkdir → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu
+[22:20:16] ℹ️ $ rclone mkdir "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu"
+[22:20:20] ℹ️ │ │ ├─ [1/6] Lí thuyết 2.A - Khái niệm biến (variable) và kiểu dữ liệu (data type)  .mp4
+[22:20:23] 🎬 │ │ │ 🎬 Lí thuyết 2.A - Khái niệm biến (variable) và kiểu dữ liệu (data type)  .mp4  (74.13 MB)
+[22:20:23] 🎬 Bắt đầu capture video: Lí thuyết 2.A - Khái niệm biến (variable) và kiểu dữ liệu (data type)  .mp4
+[22:20:23] ℹ️ Link: https://drive.google.com/file/d/14khZPpDED2ubp135Al3kocHrWzxzd0-i/view
+[22:20:24] ❌ capture_urls.py exit code = 1
+[22:20:24] ❌ │ │ │ ❌ Video download fail: Lí thuyết 2.A - Khái niệm biến (variable) và kiểu dữ liệu (data type)  .mp4
+
+  [░░░░░░░░░░░░░░░░░░░░] 0%  (0/5)  skip=0  fail=5
+
+[22:20:24] ℹ️ │ │ ├─ [2/6] Lý thuyết 2.B - NhậpXuất dữ liệu cho biến trong C++  .mp4
+[22:20:26] 🎬 │ │ │ 🎬 Lý thuyết 2.B - NhậpXuất dữ liệu cho biến trong C++  .mp4  (33.18 MB)
+[22:20:26] 🎬 Bắt đầu capture video: Lý thuyết 2.B - NhậpXuất dữ liệu cho biến trong C++  .mp4
+[22:20:26] ℹ️ Link: https://drive.google.com/file/d/1I7m0_yCin9g1TmlJ5xLbf5mkaeGF7VxQ/view
+[22:20:27] ❌ capture_urls.py exit code = 1
+[22:20:27] ❌ │ │ │ ❌ Video download fail: Lý thuyết 2.B - NhậpXuất dữ liệu cho biến trong C++  .mp4
+
+  [░░░░░░░░░░░░░░░░░░░░] 0%  (0/6)  skip=0  fail=6
+
+[22:20:27] ℹ️ │ │ ├─ [3/6] Lý thuyết 2.C - NhậpXuất dữ liệu cho biến theo chuẩn C (cũ)  .mp4
+[22:20:29] 🎬 │ │ │ 🎬 Lý thuyết 2.C - NhậpXuất dữ liệu cho biến theo chuẩn C (cũ)  .mp4  (58.14 MB)
+[22:20:29] 🎬 Bắt đầu capture video: Lý thuyết 2.C - NhậpXuất dữ liệu cho biến theo chuẩn C (cũ)  .mp4
+[22:20:29] ℹ️ Link: https://drive.google.com/file/d/16inDnhh5zk3v7w-_w8Fvy-V37HurD-J7/view
+[22:20:30] ❌ capture_urls.py exit code = 1
+[22:20:30] ❌ │ │ │ ❌ Video download fail: Lý thuyết 2.C - NhậpXuất dữ liệu cho biến theo chuẩn C (cũ)  .mp4
+
+  [░░░░░░░░░░░░░░░░░░░░] 0%  (0/7)  skip=0  fail=7
+
+[22:20:30] ℹ️ │ │ ├─ [4/6] Thực hành 2.1.rtf
+[22:20:33] 📄 │ │ │ 📄 Thực hành 2.1.rtf  (745.98 KB, application/rtf)
+[22:20:33] ⬇️ Download: Thực hành 2.1.rtf (id=1nBi8YdCqsdu...)
+[22:20:35] ✅ Downloaded: Thực hành 2.1.rtf (1204KB)
+[22:20:35] ⬆️ Upload: Thực hành 2.1.rtf → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu/
+[22:20:35] ℹ️ $ rclone copy "C:\PROJECT\DOWN_VIDEO\_temp_download\Thực hành 2.1.rtf" "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu" --progress
+[22:20:40] ✅ Xóa local: Thực hành 2.1.rtf
+[22:20:40] ✅ │ │ │ ✅ File done: Thực hành 2.1.rtf
+
+  [██░░░░░░░░░░░░░░░░░░] 12%  (1/8)  skip=0  fail=7
+
+[22:20:40] ℹ️ │ │ ├─ [5/6] Thực hành 2.2.rtf
+[22:20:43] 📄 │ │ │ 📄 Thực hành 2.2.rtf  (2.35 MB, application/rtf)
+[22:20:43] ⬇️ Download: Thực hành 2.2.rtf (id=1Oozyu4EFuQv...)
+[22:20:45] ✅ Downloaded: Thực hành 2.2.rtf (1204KB)
+[22:20:45] ⬆️ Upload: Thực hành 2.2.rtf → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu/
+[22:20:45] ℹ️ $ rclone copy "C:\PROJECT\DOWN_VIDEO\_temp_download\Thực hành 2.2.rtf" "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu" --progress
+[22:20:50] ✅ Xóa local: Thực hành 2.2.rtf
+[22:20:50] ✅ │ │ │ ✅ File done: Thực hành 2.2.rtf
+
+  [████░░░░░░░░░░░░░░░░] 22%  (2/9)  skip=0  fail=7
+
+[22:20:50] ℹ️ │ │ ├─ [6/6] k29cmutp,7
+[22:20:50] 📁 │ │ │ 📁 k29cmutp,7  (1 files, 0 folders)
+[22:20:50] 📁 mkdir → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu/k29cmutp,7
+[22:20:50] ℹ️ $ rclone mkdir "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu/k29cmutp,7"
+[22:20:55] ℹ️ │ │ │ ├─ [1/1] Dangkitrai.xlsx
+[22:20:57] 📄 │ │ │ │ 📄 Dangkitrai.xlsx  (50.87 KB, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+[22:20:57] ⬇️ Download: Dangkitrai.xlsx (id=1rlWbX5EjYYV...)
+  ⬇️ 50KB / 50KB (100%)
+[INFO] URL: https://drive.google.com/file/d/1NAIrjt0GJF6e7wKtlfAuaBGLYaWXdmnM/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/1VNVQj3y6ePLvWvIuwrESAuoOfFKeDqv-/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/1RRO1hdOc-9BwkGw1p7-teUB6ZEVnTN-L/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/1UddM3prxMfY6C4EIqf3pbQygsi30sd8j/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/1IE9EXDSFFVToJrmH-GTF-0G8sjv9OHrX/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[INFO] URL: https://drive.google.com/file/d/1-natnVy_vMSdcXsF5E4a5P5YCZQpIcEI/view
+
+[STEP 0] Mở Chrome với profile hệ thống (đã login sẵn)...
+
+[22:21:01] ✅ Downloaded: Dangkitrai.xlsx (50KB)
+[22:21:01] ⬆️ Upload: Dangkitrai.xlsx → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu/k29cmutp,7/
+[22:21:01] ℹ️ $ rclone copy C:\PROJECT\DOWN_VIDEO\_temp_download\Dangkitrai.xlsx "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 02 Biến và kiểu dữ liệu/k29cmutp,7" --progress
+[22:21:06] ✅ Xóa local: Dangkitrai.xlsx
+[22:21:06] ✅ │ │ │ │ ✅ File done: Dangkitrai.xlsx
+
+  [██████░░░░░░░░░░░░░░] 30%  (3/10)  skip=0  fail=7
+
+[22:21:06] ℹ️ │ ├─ [3/17] Chương 03 Các phép toán với biến   
+[22:21:06] 📁 │ │ 📁 Chương 03 Các phép toán với biến     (14 files, 0 folders)
+[22:21:06] 📁 mkdir → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 03 Các phép toán với biến
+[22:21:06] ℹ️ $ rclone mkdir "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 03 Các phép toán với biến"
+[22:21:11] ℹ️ │ │ ├─ [1/14] Lí thuyết 3.A - Khái niệm toán tử (Operator) và biểu thức (expression)  .mp4
+[22:21:13] 🎬 │ │ │ 🎬 Lí thuyết 3.A - Khái niệm toán tử (Operator) và biểu thức (expression)  .mp4  (25.33 MB)
+[22:21:13] 🎬 Bắt đầu capture video: Lí thuyết 3.A - Khái niệm toán tử (Operator) và biểu thức (expression)  .mp4
+[22:21:13] ℹ️ Link: https://drive.google.com/file/d/1NAIrjt0GJF6e7wKtlfAuaBGLYaWXdmnM/view
+[22:21:14] ❌ capture_urls.py exit code = 1
+[22:21:14] ❌ │ │ │ ❌ Video download fail: Lí thuyết 3.A - Khái niệm toán tử (Operator) và biểu thức (expression)  .mp4
+
+  [█████░░░░░░░░░░░░░░░] 27%  (3/11)  skip=0  fail=8
+
+[22:21:14] ℹ️ │ │ ├─ [2/14] Lí thuyết 3.F - Phép toán ép kiểu (Type casting operator)  .mp4
+[22:21:17] 🎬 │ │ │ 🎬 Lí thuyết 3.F - Phép toán ép kiểu (Type casting operator)  .mp4  (50.61 MB)
+[22:21:17] 🎬 Bắt đầu capture video: Lí thuyết 3.F - Phép toán ép kiểu (Type casting operator)  .mp4
+[22:21:17] ℹ️ Link: https://drive.google.com/file/d/1VNVQj3y6ePLvWvIuwrESAuoOfFKeDqv-/view
+[22:21:18] ❌ capture_urls.py exit code = 1
+[22:21:18] ❌ │ │ │ ❌ Video download fail: Lí thuyết 3.F - Phép toán ép kiểu (Type casting operator)  .mp4
+
+  [█████░░░░░░░░░░░░░░░] 25%  (3/12)  skip=0  fail=9
+
+[22:21:18] ℹ️ │ │ ├─ [3/14] Lý thuyết 3.B - Phép gán (Assignment operator)  .mp4
+[22:21:20] 🎬 │ │ │ 🎬 Lý thuyết 3.B - Phép gán (Assignment operator)  .mp4  (28.70 MB)
+[22:21:20] 🎬 Bắt đầu capture video: Lý thuyết 3.B - Phép gán (Assignment operator)  .mp4
+[22:21:20] ℹ️ Link: https://drive.google.com/file/d/1RRO1hdOc-9BwkGw1p7-teUB6ZEVnTN-L/view
+[22:21:21] ❌ capture_urls.py exit code = 1
+[22:21:21] ❌ │ │ │ ❌ Video download fail: Lý thuyết 3.B - Phép gán (Assignment operator)  .mp4
+
+  [████░░░░░░░░░░░░░░░░] 23%  (3/13)  skip=0  fail=10
+
+[22:21:21] ℹ️ │ │ ├─ [4/14] Lý thuyết 3.C - Phép toán số học (Arithmetic operator)  .mp4
+[22:21:23] 🎬 │ │ │ 🎬 Lý thuyết 3.C - Phép toán số học (Arithmetic operator)  .mp4  (112.96 MB)
+[22:21:23] 🎬 Bắt đầu capture video: Lý thuyết 3.C - Phép toán số học (Arithmetic operator)  .mp4
+[22:21:23] ℹ️ Link: https://drive.google.com/file/d/1UddM3prxMfY6C4EIqf3pbQygsi30sd8j/view
+[22:21:24] ❌ capture_urls.py exit code = 1
+[22:21:24] ❌ │ │ │ ❌ Video download fail: Lý thuyết 3.C - Phép toán số học (Arithmetic operator)  .mp4
+
+  [████░░░░░░░░░░░░░░░░] 21%  (3/14)  skip=0  fail=11
+
+[22:21:24] ℹ️ │ │ ├─ [5/14] Lý thuyết 3.D - Phép toán quan hệ (Relation operator)  .mp4
+[22:21:27] 🎬 │ │ │ 🎬 Lý thuyết 3.D - Phép toán quan hệ (Relation operator)  .mp4  (30.87 MB)
+[22:21:27] 🎬 Bắt đầu capture video: Lý thuyết 3.D - Phép toán quan hệ (Relation operator)  .mp4
+[22:21:27] ℹ️ Link: https://drive.google.com/file/d/1IE9EXDSFFVToJrmH-GTF-0G8sjv9OHrX/view
+[22:21:28] ❌ capture_urls.py exit code = 1
+[22:21:28] ❌ │ │ │ ❌ Video download fail: Lý thuyết 3.D - Phép toán quan hệ (Relation operator)  .mp4
+
+  [████░░░░░░░░░░░░░░░░] 20%  (3/15)  skip=0  fail=12
+
+[22:21:28] ℹ️ │ │ ├─ [6/14] Lý thuyết 3.E - Phép toán logic (Logical operator)  .mp4
+[22:21:30] 🎬 │ │ │ 🎬 Lý thuyết 3.E - Phép toán logic (Logical operator)  .mp4  (69.42 MB)
+[22:21:30] 🎬 Bắt đầu capture video: Lý thuyết 3.E - Phép toán logic (Logical operator)  .mp4
+[22:21:30] ℹ️ Link: https://drive.google.com/file/d/1-natnVy_vMSdcXsF5E4a5P5YCZQpIcEI/view
+[22:21:31] ❌ capture_urls.py exit code = 1
+[22:21:31] ❌ │ │ │ ❌ Video download fail: Lý thuyết 3.E - Phép toán logic (Logical operator)  .mp4
+
+  [███░░░░░░░░░░░░░░░░░] 19%  (3/16)  skip=0  fail=13
+
+[22:21:31] ℹ️ │ │ ├─ [7/14] Thực hành 3.1.rtf
+[22:21:33] 📄 │ │ │ 📄 Thực hành 3.1.rtf  (1.34 MB, application/rtf)
+[22:21:33] ⬇️ Download: Thực hành 3.1.rtf (id=1jyc1Z6Qb9V_...)
+[22:21:37] ✅ Downloaded: Thực hành 3.1.rtf (1204KB)
+[22:21:37] ⬆️ Upload: Thực hành 3.1.rtf → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 03 Các phép toán với biến/
+[22:21:37] ℹ️ $ rclone copy "C:\PROJECT\DOWN_VIDEO\_temp_download\Thực hành 3.1.rtf" "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 03 Các phép toán với biến" --progress
+[22:21:41] ✅ Xóa local: Thực hành 3.1.rtf
+[22:21:41] ✅ │ │ │ ✅ File done: Thực hành 3.1.rtf
+
+  [████░░░░░░░░░░░░░░░░] 24%  (4/17)  skip=0  fail=13
+
+[22:21:41] ℹ️ │ │ ├─ [8/14] Thực hành 3.2.rtf
+[22:21:44] 📄 │ │ │ 📄 Thực hành 3.2.rtf  (1002.89 KB, application/rtf)
+[22:21:44] ⬇️ Download: Thực hành 3.2.rtf (id=17aWuxjGJv24...)
+[22:21:46] ✅ Downloaded: Thực hành 3.2.rtf (1204KB)
+[22:21:46] ⬆️ Upload: Thực hành 3.2.rtf → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 03 Các phép toán với biến/
+[22:21:46] ℹ️ $ rclone copy "C:\PROJECT\DOWN_VIDEO\_temp_download\Thực hành 3.2.rtf" "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 03 Các phép toán với biến" --progress
+[22:21:51] ✅ Xóa local: Thực hành 3.2.rtf
+[22:21:51] ✅ │ │ │ ✅ File done: Thực hành 3.2.rtf
+
+  [█████░░░░░░░░░░░░░░░] 28%  (5/18)  skip=0  fail=13
+
+[22:21:51] ℹ️ │ │ ├─ [9/14] Thực hành 3.3.rtf
+[22:21:53] 📄 │ │ │ 📄 Thực hành 3.3.rtf  (2.94 MB, application/rtf)
+[22:21:53] ⬇️ Download: Thực hành 3.3.rtf (id=1_HJa5mT5G5y...)
+[22:21:56] ✅ Downloaded: Thực hành 3.3.rtf (1204KB)
+[22:21:56] ⬆️ Upload: Thực hành 3.3.rtf → gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 03 Các phép toán với biến/
+[22:21:56] ℹ️ $ rclone copy "C:\PROJECT\DOWN_VIDEO\_temp_download\Thực hành 3.3.rtf" "gdrive:Full Combo khóa học Vũ Nguyễn Coder/Khoá Học C／c++ Cơ Bản Cùng Vũ Nguyễn Coder/Chương 03 Các phép toán với biến" --progress
+[22:22:01] ✅ Xóa local: Thực hành 3.3.rtf
+[22:22:01] ✅ │ │ │ ✅ File done: Thực hành 3.3.rtf
